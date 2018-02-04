@@ -34,7 +34,6 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,7 +47,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     private de.hdodenhof.circleimageview.CircleImageView circleImageView;
     private RadioButton userChoice;
     private TextView tvUploadProfileImage;
-    private String name, username, phone, email, password, school, grade, userChoiceText = "Student";
+    private String name, username, phone, email, password, school, grade, userType = "Student";
     private View focusView = null;
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -131,11 +130,11 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 if (radioStudent.isChecked())
                     gradesOfTeacher.setVisibility(View.GONE);
                 gradesOfStudent.setVisibility(View.VISIBLE);
-                userChoiceText = "Student";
+                userType = "Student";
                 break;
             case R.id.radio_teacher:
                 if (radioTeacher.isChecked())
-                    userChoiceText = "Teacher";
+                    userType = "Teacher";
                 gradesOfStudent.setVisibility(View.GONE);
                 gradesOfTeacher.setVisibility(View.VISIBLE);
                 break;
@@ -211,11 +210,11 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void updateUserInfoWithoutPhoto(String name, String username, String phone, String school) {
-        if (userChoiceText.equals("Teacher")) {
+        if (userType.equals("Teacher")) {
             schoolDatabase = FirebaseDatabase.getInstance().getReference().child("school_names").child(school).child("school_staff").child("teachers");
             ArrayList<String> subjectList = getSubjectList();
             ArrayList<String> gradesList = getGradesList();
-            TeacherInformation teacherInformation = new TeacherInformation(name, username, phone, email, gradesList, subjectList, userChoiceText);
+            TeacherInformation teacherInformation = new TeacherInformation(name, username, phone, email, gradesList, subjectList, userType);
             schoolDatabase.child(userID).setValue(teacherInformation).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -229,7 +228,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         } else {
             schoolDatabase = FirebaseDatabase.getInstance().getReference().child("school_names").child(school).child("grades").child(choicenGrade).child("students");
             ArrayList<String> subjectList = getSubjectList();
-            StudentInformation studentInformation = new StudentInformation(name, username, phone, email, choicenGrade, subjectList, userChoiceText);
+            StudentInformation studentInformation = new StudentInformation(name, username, phone, email, choicenGrade, subjectList, userType);
             schoolDatabase.child(userID).setValue(studentInformation).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -285,9 +284,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void updateUserInfoWithphoto(final String name, final String username, final String phone, final String school, Uri photoUri) {
-        if (userChoiceText.equals("Teacher")) {
+        if (userType.equals("Teacher")) {
 
-            mStorageImages = FirebaseStorage.getInstance().getReference().child("profile_images");
+            mStorageImages = FirebaseStorage.getInstance().getReference().child("profile_images").child(userID);
 
             StorageReference filePath = mStorageImages.child(photoUri.getLastPathSegment());
             filePath.putFile(photoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -297,7 +296,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     String downloadUri = taskSnapshot.getDownloadUrl().toString();
                     ArrayList<String> subjectList = getSubjectList();
                     ArrayList<String> gradesList = getGradesList();
-                    TeacherInformation teacherInformation = new TeacherInformation(name, username, phone, email, gradesList, subjectList, downloadUri, userChoiceText);
+                    TeacherInformation teacherInformation = new TeacherInformation(name, username, phone, email, gradesList, subjectList, downloadUri, userType);
                     schoolDatabase.child(userID).setValue(teacherInformation);
                     pDialog.dismiss();
                     Toast.makeText(SignupActivity.this, "successfully", Toast.LENGTH_SHORT).show();
@@ -309,7 +308,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 public void onFailure(@NonNull Exception e) {
                     ArrayList<String> subjectList = getSubjectList();
                     ArrayList<String> gradesList = getGradesList();
-                    TeacherInformation teacherInformation = new TeacherInformation(name, username, phone, email, gradesList, subjectList, userChoiceText);
+                    TeacherInformation teacherInformation = new TeacherInformation(name, username, phone, email, gradesList, subjectList, userType);
                     schoolDatabase.child(userID).setValue(teacherInformation);
                     pDialog.dismiss();
                     Toast.makeText(SignupActivity.this, "Failed to upload image!", Toast.LENGTH_SHORT).show();
@@ -321,7 +320,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
         } else {
 
-            mStorageImages = FirebaseStorage.getInstance().getReference().child("profile_images");
+            mStorageImages = FirebaseStorage.getInstance().getReference().child("profile_images").child(userID);
 
             StorageReference filePath = mStorageImages.child(photoUri.getLastPathSegment());
             filePath.putFile(photoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -332,7 +331,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     String downloadUri = taskSnapshot.getDownloadUrl().toString();
                     Log.d("downloadUri", downloadUri);
                     ArrayList<String> subjectList = getSubjectList();
-                    StudentInformation studentInformation = new StudentInformation(name, username, phone, email, choicenGrade, subjectList, downloadUri, userChoiceText);
+                    StudentInformation studentInformation = new StudentInformation(name, username, phone, email, choicenGrade, subjectList, downloadUri, userType);
                     schoolDatabase.child(userID).setValue(studentInformation);
                     pDialog.dismiss();
                     Toast.makeText(SignupActivity.this, "successfully", Toast.LENGTH_SHORT).show();
@@ -347,7 +346,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     ArrayList<String> subjectList = getSubjectList();
-                    StudentInformation studentInformation = new StudentInformation(name, username, phone, email, choicenGrade, subjectList, userChoiceText);
+                    StudentInformation studentInformation = new StudentInformation(name, username, phone, email, choicenGrade, subjectList, userType);
                     schoolDatabase.child(userID).setValue(studentInformation);
                     pDialog.dismiss();
                     Toast.makeText(SignupActivity.this, "failed to upload the image!", Toast.LENGTH_SHORT).show();

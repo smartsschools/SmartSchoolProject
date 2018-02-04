@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 class StudentInformation {
 
-    private String name, username, phone, email, choicenGrade, downloadUri, userChoiceText;
+    private String name, username, phone, email, choicenGrade, downloadUri, userType;
     private ArrayList<String> subjectsList;
 
 
@@ -18,14 +18,14 @@ class StudentInformation {
     }
 
 
-    public StudentInformation(String name, String username, String phone, String email, String choicenGrade, ArrayList<String> subjectsList, String userChoiceText) {
+    public StudentInformation(String name, String username, String phone, String email, String choicenGrade, ArrayList<String> subjectsList, String userType) {
         this.name = name;
         this.username = username;
         this.phone = phone;
         this.email = email;
         this.choicenGrade = choicenGrade;
         this.subjectsList = subjectsList;
-        this.userChoiceText = userChoiceText;
+        this.userType = userType;
     }
 
 
@@ -37,7 +37,7 @@ class StudentInformation {
         this.choicenGrade = choicenGrade;
         this.subjectsList = subjectsList;
         this.downloadUri = downloadUri;
-        this.userChoiceText = userChoiceText;
+        this.userType = userChoiceText;
     }
 
     public String getName() {
@@ -97,10 +97,10 @@ class StudentInformation {
     }
 
     public String getUserChoiceText() {
-        return userChoiceText;
+        return userType;
     }
 
     public void setUserChoiceText(String userChoiceText) {
-        this.userChoiceText = userChoiceText;
+        this.userType = userChoiceText;
     }
 }
