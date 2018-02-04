@@ -302,7 +302,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(SignupActivity.this, "successfully", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(SignupActivity.this, MailVerificationActivity.class);
                     startActivity(i);
-                    finish();
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -316,7 +315,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(SignupActivity.this, "Failed to upload image!", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(SignupActivity.this, MailVerificationActivity.class);
                     startActivity(i);
-                    finish();
                 }
             });
 
@@ -340,7 +338,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(SignupActivity.this, "successfully", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(SignupActivity.this, MailVerificationActivity.class);
                     startActivity(i);
-                    finish();
 
 
                 }
@@ -356,7 +353,6 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(SignupActivity.this, "failed to upload the image!", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(SignupActivity.this, MailVerificationActivity.class);
                     startActivity(i);
-                    finish();
                 }
             });
         }
