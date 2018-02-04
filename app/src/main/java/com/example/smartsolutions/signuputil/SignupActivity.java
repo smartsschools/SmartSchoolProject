@@ -417,7 +417,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private boolean isPhoneValid(String phone) {
-        return phone.length() > 5 && phone.length() < 30;
+        return phone.length() > 5 && phone.length() < 28;
 
     }
 
