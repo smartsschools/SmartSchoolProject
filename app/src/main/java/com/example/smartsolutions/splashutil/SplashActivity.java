@@ -23,7 +23,6 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 Intent loginActivity=new Intent(SplashActivity.this,LoginActiviy.class);
 
-                Toast.makeText(SplashActivity.this, "kh", Toast.LENGTH_SHORT).show();
                 startActivity(loginActivity);
 //                Intent signupActivity=new Intent(SplashActivity.this,SignupActivity.class);
 //
