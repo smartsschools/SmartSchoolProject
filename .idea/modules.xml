@@ -3,8 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://D:\Freelancing\SmartSchoolProject\SmartSchool.iml" filepath="D:\Freelancing\SmartSchoolProject\SmartSchool.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SmartSchoolProject.iml" filepath="$PROJECT_DIR$/SmartSchoolProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SmartSchoolProject.iml" filepath="$PROJECT_DIR$/.idea/SmartSchoolProject.iml" />
+      <module fileurl="file://C:\Users\lody\AndroidStudioProjects\ASP\SmartSchoolProject\SmartSchoolProject.iml" filepath="C:\Users\lody\AndroidStudioProjects\ASP\SmartSchoolProject\SmartSchoolProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\lody\AndroidStudioProjects\ASP\SmartSchoolProject\app\app.iml" filepath="C:\Users\lody\AndroidStudioProjects\ASP\SmartSchoolProject\app\app.iml" />
     </modules>
   </component>
 </project>
