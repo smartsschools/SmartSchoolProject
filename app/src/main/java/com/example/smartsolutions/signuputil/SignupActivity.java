@@ -214,7 +214,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             schoolDatabase = FirebaseDatabase.getInstance().getReference().child("school_names").child(school).child("school_staff").child("teachers");
             ArrayList<String> subjectList = getSubjectList();
             ArrayList<String> gradesList = getGradesList();
-            TeacherInformation teacherInformation = new TeacherInformation(name, username, phone, email, gradesList, subjectList, userType);
+            TeacherInformation teacherInformation = new TeacherInformation(name, username, phone, email, gradesList, subjectList, userType, school);
             schoolDatabase.child(userID).setValue(teacherInformation).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -228,7 +228,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         } else {
             schoolDatabase = FirebaseDatabase.getInstance().getReference().child("school_names").child(school).child("grades").child(choicenGrade).child("students");
             ArrayList<String> subjectList = getSubjectList();
-            StudentInformation studentInformation = new StudentInformation(name, username, phone, email, choicenGrade, subjectList, userType);
+            StudentInformation studentInformation = new StudentInformation(name, username, phone, email, choicenGrade, subjectList, userType, school);
             schoolDatabase.child(userID).setValue(studentInformation).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -296,7 +296,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     String downloadUri = taskSnapshot.getDownloadUrl().toString();
                     ArrayList<String> subjectList = getSubjectList();
                     ArrayList<String> gradesList = getGradesList();
-                    TeacherInformation teacherInformation = new TeacherInformation(name, username, phone, email, gradesList, subjectList, downloadUri, userType);
+                    TeacherInformation teacherInformation = new TeacherInformation(name, username, phone, email, gradesList, subjectList, downloadUri, userType, school);
                     schoolDatabase.child(userID).setValue(teacherInformation);
                     pDialog.dismiss();
                     Toast.makeText(SignupActivity.this, "successfully", Toast.LENGTH_SHORT).show();
@@ -309,7 +309,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 public void onFailure(@NonNull Exception e) {
                     ArrayList<String> subjectList = getSubjectList();
                     ArrayList<String> gradesList = getGradesList();
-                    TeacherInformation teacherInformation = new TeacherInformation(name, username, phone, email, gradesList, subjectList, userType);
+                    TeacherInformation teacherInformation = new TeacherInformation(name, username, phone, email, gradesList, subjectList, userType, school);
                     schoolDatabase.child(userID).setValue(teacherInformation);
                     pDialog.dismiss();
                     Toast.makeText(SignupActivity.this, "Failed to upload image!", Toast.LENGTH_SHORT).show();
@@ -332,7 +332,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     String downloadUri = taskSnapshot.getDownloadUrl().toString();
                     Log.d("downloadUri", downloadUri);
                     ArrayList<String> subjectList = getSubjectList();
-                    StudentInformation studentInformation = new StudentInformation(name, username, phone, email, choicenGrade, subjectList, downloadUri, userType);
+                    StudentInformation studentInformation = new StudentInformation(name, username, phone, email, choicenGrade, subjectList, downloadUri, userType, school);
                     schoolDatabase.child(userID).setValue(studentInformation);
                     pDialog.dismiss();
                     Toast.makeText(SignupActivity.this, "successfully", Toast.LENGTH_SHORT).show();
@@ -347,7 +347,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     ArrayList<String> subjectList = getSubjectList();
-                    StudentInformation studentInformation = new StudentInformation(name, username, phone, email, choicenGrade, subjectList, userType);
+                    StudentInformation studentInformation = new StudentInformation(name, username, phone, email, choicenGrade, subjectList, userType, school);
                     schoolDatabase.child(userID).setValue(studentInformation);
                     pDialog.dismiss();
                     Toast.makeText(SignupActivity.this, "failed to upload the image!", Toast.LENGTH_SHORT).show();

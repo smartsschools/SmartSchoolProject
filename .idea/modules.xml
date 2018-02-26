@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SmartSchool.iml" filepath="$PROJECT_DIR$/SmartSchool.iml" />
+      <module fileurl="file://D:\Freelancing\SmartSchoolProject\SmartSchool.iml" filepath="D:\Freelancing\SmartSchoolProject\SmartSchool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SmartSchoolProject.iml" filepath="$PROJECT_DIR$/SmartSchoolProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

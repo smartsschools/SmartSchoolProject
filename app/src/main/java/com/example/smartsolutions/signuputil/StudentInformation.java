@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 class StudentInformation {
 
-    private String name, username, phone, email, choicenGrade, downloadUri, userType;
+    private String name, username, phone, email, choicenGrade, downloadUri, userType, userSchool;
     private ArrayList<String> subjectsList;
 
 
@@ -18,7 +18,7 @@ class StudentInformation {
     }
 
 
-    public StudentInformation(String name, String username, String phone, String email, String choicenGrade, ArrayList<String> subjectsList, String userType) {
+    public StudentInformation(String name, String username, String phone, String email, String choicenGrade, ArrayList<String> subjectsList, String userType, String userSchool) {
         this.name = name;
         this.username = username;
         this.phone = phone;
@@ -26,10 +26,11 @@ class StudentInformation {
         this.choicenGrade = choicenGrade;
         this.subjectsList = subjectsList;
         this.userType = userType;
+        this.userSchool = userSchool;
     }
 
 
-    public StudentInformation(String name, String username, String phone, String email, String choicenGrade, ArrayList<String> subjectsList, String downloadUri, String userChoiceText) {
+    public StudentInformation(String name, String username, String phone, String email, String choicenGrade, ArrayList<String> subjectsList, String downloadUri, String userChoiceText, String userSchool) {
         this.name = name;
         this.username = username;
         this.phone = phone;
@@ -38,6 +39,8 @@ class StudentInformation {
         this.subjectsList = subjectsList;
         this.downloadUri = downloadUri;
         this.userType = userChoiceText;
+        this.userSchool = userSchool;
+
     }
 
     public String getName() {
@@ -103,4 +106,23 @@ class StudentInformation {
     public void setUserChoiceText(String userChoiceText) {
         this.userType = userChoiceText;
     }
+
+
+    public String getUserSchool() {
+        return userSchool;
+    }
+
+    public void setUserSchool(String userSchool) {
+        this.userSchool = userSchool;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+
 }
